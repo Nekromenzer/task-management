@@ -2,7 +2,7 @@ import React from "react";
 
 const TodoList = ({ taskList, handleDelete, handleEdit, handleState }) => {
   return (
-    <div className="mt-4 flex flex-col gap-2">
+    <div className=" transition-all duration-500 delay-75 ease-in-out mt-4 flex flex-col gap-2 w-full max-w-[600px]">
       {taskList?.map((task, idx) => (
         <div
           key={idx}

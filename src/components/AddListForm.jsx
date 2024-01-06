@@ -26,7 +26,7 @@ const AddListForm = ({ tasks, handleOnChange, handleAdd }) => {
   ];
 
   return (
-    <div className="flex items-center gap-8 ">
+    <div className="flex items-center gap-8 w-full max-w-[600px]">
       {formElements.map((formItem, id) => (
         <div className="flex flex-col" key={id}>
           <label>{formItem.label}</label>
@@ -41,7 +41,7 @@ const AddListForm = ({ tasks, handleOnChange, handleAdd }) => {
       ))}
       <div>
         <button
-          className="bg-blue-400 px-4 py-2 min-w-[6rem] rounded"
+          className="bg-blue-400 hover:bg-green-400 transition-colors ease-in  duration-300 px-4 py-2 min-w-[6rem] rounded"
           onClick={() => handleAdd()}
         >
           Add
