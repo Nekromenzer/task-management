@@ -20,17 +20,19 @@ function App() {
   };
 
   const handleAdd = () => {
-    // const sampleList = [...taskList];
-    // sampleList.push(tasks);
-    // setTaskList(sampleList);
-    setTaskList([...taskList, tasks]);
-    // clear the input after task added to the list
-    setTasks({
-      title: "",
-      date: "",
-      status: "",
-      priority: false,
-    });
+    if (tasks.title !== "" && tasks.date !== "") {
+      // const sampleList = [...taskList];
+      // sampleList.push(tasks);
+      // setTaskList(sampleList);
+      setTaskList([...taskList, tasks]);
+      // clear the input after task added to the list
+      setTasks({
+        title: "",
+        date: "",
+        status: false,
+        priority: false,
+      });
+    }
   };
 
   const handleDelete = (id) => {
@@ -41,8 +43,20 @@ function App() {
   const handleEdit = (task, id) => {
     const newTask = taskList.filter((_, idx) => idx === id);
     setTasks(newTask[0]);
-
     handleDelete(id);
+  };
+
+  const handleState = (idx) => {
+    const newList = taskList.map((item, index) => {
+      if (index === idx) {
+        return {
+          ...item,
+          status: !item.status,
+        };
+      }
+      return item;
+    });
+    setTaskList(newList);
   };
 
   return (
@@ -93,11 +107,12 @@ function App() {
               key={idx}
               className="w-full flex gap-2 items-center py-4 px-3 bg-sky-200 rounded"
             >
-              <div className="text-xl w-[300px]">{task.title}</div>
+              <div className="text-xl w-[250px]">{task.title}</div>
               <div className="text-base w-[100px]">{task.date}</div>
               <div className="text-base w-[60px]">
                 {task.priority ? "🔥" : "🚫"}
               </div>
+              <input type="checkbox" onChange={() => handleState(idx)} />
               <button
                 className="text-blue-600 font-bold"
                 onClick={() => handleEdit(task, idx)}
