@@ -1,5 +1,7 @@
 import "./App.css";
 import { useState } from "react";
+import TodoList from "./components/TodoList";
+import AddListForm from "./components/AddListForm";
 
 function App() {
   const [tasks, setTasks] = useState({
@@ -62,72 +64,17 @@ function App() {
   return (
     <div className="App">
       <div className="h-screen w-auto px-6 bg-blue-100">
-        <div className="flex items-center gap-8 ">
-          <div className="flex flex-col">
-            <label>Task</label>
-            <input
-              name="title"
-              type="text"
-              onChange={(e) => handleOnChange(e)}
-              value={tasks.title}
-              placeholder="task"
-            />
-          </div>
-          <div className="flex flex-col">
-            <label>Date</label>
-            <input
-              name="date"
-              type="date"
-              onChange={(e) => handleOnChange(e)}
-              value={tasks.date}
-              placeholder="12/12/2021"
-            />
-          </div>
-          <div className="flex flex-col">
-            <label>Priority</label>
-            <input
-              name="priority"
-              type="checkbox"
-              onChange={(e) => handleOnChange(e)}
-              checked={tasks.priority}
-            />
-          </div>
-          <div>
-            <button
-              className="bg-blue-400 px-4 py-2 min-w-[6rem] rounded"
-              onClick={() => handleAdd()}
-            >
-              Add
-            </button>
-          </div>
-        </div>
-        <div className="mt-4 flex flex-col gap-2">
-          {taskList.map((task, idx) => (
-            <div
-              key={idx}
-              className="w-full flex gap-2 items-center py-4 px-3 bg-sky-200 rounded"
-            >
-              <div className="text-xl w-[250px]">{task.title}</div>
-              <div className="text-base w-[100px]">{task.date}</div>
-              <div className="text-base w-[60px]">
-                {task.priority ? "🔥" : "🚫"}
-              </div>
-              <input type="checkbox" onChange={() => handleState(idx)} />
-              <button
-                className="text-blue-600 font-bold"
-                onClick={() => handleEdit(task, idx)}
-              >
-                ✒️
-              </button>
-              <button
-                className="text-red-600 font-bold"
-                onClick={() => handleDelete(idx)}
-              >
-                🗑️
-              </button>
-            </div>
-          ))}
-        </div>
+        <AddListForm
+          tasks={tasks}
+          handleOnChange={handleOnChange}
+          handleAdd={handleAdd}
+        />
+        <TodoList
+          taskList={taskList}
+          handleDelete={handleDelete}
+          handleEdit={handleEdit}
+          handleState={handleState}
+        />
       </div>
     </div>
   );
