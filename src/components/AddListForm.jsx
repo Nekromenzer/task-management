@@ -36,6 +36,7 @@ const AddListForm = ({ tasks, handleOnChange, handleAdd }) => {
             onChange={(e) => handleOnChange(e)}
             value={tasks.title}
             placeholder={tasks.placeholder}
+            className="border-2 border-sky-400 rounded px-2 py-1"
           />
         </div>
       ))}
