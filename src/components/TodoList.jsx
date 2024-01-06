@@ -6,7 +6,7 @@ const TodoList = ({ taskList, handleDelete, handleEdit, handleState }) => {
       {taskList?.map((task, idx) => (
         <div
           key={idx}
-          className="w-full flex gap-2 items-center py-4 px-3 bg-sky-200 rounded"
+          className="w-full flex gap-2 items-center py-4 px-3 bg-sky-200 rounded transition-all duration-500 delay-75"
         >
           <div className="text-xl w-[250px]">{task.title}</div>
           <div className="text-base w-[100px]">{task.date}</div>
