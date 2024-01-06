@@ -63,7 +63,7 @@ function App() {
 
   return (
     <div className="App">
-      <div className="h-screen pt-6 w-auto px-6 bg-blue-100 flex flex-col items-center">
+      <div className="h-screen pt-6 w-auto px-6 bg-red-100 flex flex-col items-center">
         <AddListForm
           tasks={tasks}
           handleOnChange={handleOnChange}
