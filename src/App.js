@@ -11,8 +11,6 @@ function App() {
 
   const [taskList, setTaskList] = useState([]);
 
-  console.log(tasks);
-
   const handleOnChange = (e) => {
     if (e.target.name === "priority") {
       setTasks({ ...tasks, [e.target.name]: e.target.checked });
@@ -26,6 +24,25 @@ function App() {
     // sampleList.push(tasks);
     // setTaskList(sampleList);
     setTaskList([...taskList, tasks]);
+    // clear the input after task added to the list
+    setTasks({
+      title: "",
+      date: "",
+      status: "",
+      priority: false,
+    });
+  };
+
+  const handleDelete = (id) => {
+    const newList = taskList.filter((task, idx) => idx !== id);
+    setTaskList(newList);
+  };
+
+  const handleEdit = (task, id) => {
+    const newTask = taskList.filter((_, idx) => idx === id);
+    setTasks(newTask[0]);
+
+    handleDelete(id);
   };
 
   return (
@@ -70,12 +87,29 @@ function App() {
             </button>
           </div>
         </div>
-        <div className="mt-4">
+        <div className="mt-4 flex flex-col gap-2">
           {taskList.map((task, idx) => (
-            <div key={idx}>
-              <div>{task.title}</div>
-              <div>{task.date}</div>
-              <div>{task.priority}</div>
+            <div
+              key={idx}
+              className="w-full flex gap-2 items-center py-4 px-3 bg-sky-200 rounded"
+            >
+              <div className="text-xl w-[300px]">{task.title}</div>
+              <div className="text-base w-[100px]">{task.date}</div>
+              <div className="text-base w-[60px]">
+                {task.priority ? "🔥" : "🚫"}
+              </div>
+              <button
+                className="text-blue-600 font-bold"
+                onClick={() => handleEdit(task, idx)}
+              >
+                ✒️
+              </button>
+              <button
+                className="text-red-600 font-bold"
+                onClick={() => handleDelete(idx)}
+              >
+                🗑️
+              </button>
             </div>
           ))}
         </div>
